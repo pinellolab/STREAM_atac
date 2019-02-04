@@ -8,7 +8,7 @@ if sys.version_info.major != 3:
 
 
 setup(name='stream_atac',
-      version="0.1.0",
+      version="0.2.0",
       description='Single-cell Trajectories Reconstruction, Exploration And Mapping of single-cell data. Preprocessing for single cell atac-seq data',
       url='https://github.com/pinellolab/stream-atac',
       author='Huidong Chen',
