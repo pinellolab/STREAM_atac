@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: stream-atac
+Version: 0.3.0
+Summary: STREAM preprocessing for single cell atac-seq data
+Home-page: https://github.com/pinellolab/stream-atac
+Author: Huidong Chen
+Author-email: huidong.chen AT mgh DOT harvard DOT edu
+License: Affero
+Description: UNKNOWN
+Platform: UNKNOWN

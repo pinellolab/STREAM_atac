@@ -1,0 +1,3 @@
+[console_scripts]
+stream_atac = stream_atac.command_line:main
+
