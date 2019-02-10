@@ -10,6 +10,8 @@ from rpy2.robjects import r as R
 import rpy2.robjects as robjects
 from rpy2.robjects import pandas2ri
 
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
+
 def preprocess_atac(file_count=None,file_region=None,file_sample=None,k=7,n_jobs = multiprocessing.cpu_count(),file_path='',delimiter='\t',workdir=None):
     """Preprocess single cell atac-seq data and genearate a scaled z-score matrix.
     
