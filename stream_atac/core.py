@@ -24,7 +24,7 @@ def preprocess_atac(file_count=None,file_region=None,file_sample=None,file_forma
     file_sample: `str`
         Sample file name. It has three columns, i.e.,chromosome names, the start position of the region, the end position of the region (No header should be included).
     file_format: `str`, optional (default: 'tsv')
-        File format of file_count. Currently supported file formats: 'tsv','txt','csv','mtx'.
+        File format of file_count. Currently supported file formats include 'tsv','txt','csv','mtx'.
     k: `int`, optional (default: 7)
         k mer.  
     n_jobs: `int`, optional (default: all available cpus)
