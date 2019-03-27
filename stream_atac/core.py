@@ -24,7 +24,7 @@ def preprocess_atac(file_count=None,file_region=None,file_sample=None,file_forma
     file_sample: `str`
         Sample file name. It has three columns, i.e.,chromosome names, the start position of the region, the end position of the region (No header should be included).
     file_format: `str`, optional (default: 'tsv')
-        File format of file_count. Currently supported file formats include 'tsv','txt','csv','mtx'.
+        File format of file_count. Currently supported file formats: 'tsv','txt','csv','mtx'.
     k: `int`, optional (default: 7)
         k mer.  
     n_jobs: `int`, optional (default: all available cpus)
@@ -99,6 +99,7 @@ def preprocess_atac(file_count=None,file_region=None,file_sample=None,file_forma
         df_regions.columns = ['seqnames','start','end']
         df_samples = pd.read_csv(file_sample,sep=delimiter,header=None,names=['cell_id'],compression= 'gzip' if file_sample.split('.')[-1]=='gz' else None)                           
 
+        
         r_regions_dataframe = pandas2ri.py2ri(df_regions)
         regions = GenomicRanges.makeGRangesFromDataFrame(r_regions_dataframe)
         counts = r_Matrix.sparseMatrix(i = df_counts['i'], j = df_counts['j'], x=df_counts['x'])
@@ -107,7 +108,8 @@ def preprocess_atac(file_count=None,file_region=None,file_sample=None,file_forma
 
         SE = SummarizedExperiment.SummarizedExperiment(rowRanges = regions,colData = samples,assays = robjects.ListVector({'counts':counts}))
         SE = chromVAR.addGCBias(SE, genome = BSgenome_Hsapiens_UCSC_hg19.BSgenome_Hsapiens_UCSC_hg19)
-
+        SE = chromVAR.filterPeaks(SE, non_overlapping = True)
+        
         # compute kmer deviations
         print('Computing k-mer deviations...')
         KmerMatch = chromVAR.matchKmers(k, SE, BSgenome_Hsapiens_UCSC_hg19.BSgenome_Hsapiens_UCSC_hg19)

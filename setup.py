@@ -8,7 +8,7 @@ if sys.version_info.major != 3:
 
 
 setup(name='stream_atac',
-      version="0.3.1",
+      version="0.3.2",
       description='STREAM preprocessing for single cell atac-seq data',
       url='https://github.com/pinellolab/stream-atac',
       author='Huidong Chen',
