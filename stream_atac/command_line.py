@@ -26,10 +26,16 @@ def main():
                         help="scATAC-seq regions file name in .bed or .bed.gz format")
     parser.add_argument("-s","--file_sample",dest="file_sample", default=None,required=True,
                         help="scATAC-seq samples file name in .tsv or tsv.gz format")
+    parser.add_argument("-g","--genome",dest="genome", default=None,required=True,
+                        help="Reference genome. Choose from {{'mm9', 'mm10', 'hg38', 'hg19'}} ")    
+    parser.add_argument("-f","--feature",dest="feature", default='kmer',
+                        help="Features used to have the analysis. Choose from {{'kmer', 'motif'}}")    
     parser.add_argument("-k",dest="k",type=int,default=7,
                         help="k-mer length for scATAC-seq analysis")
-    parser.add_argument("--n_processes",dest = "n_processes",type=int, default=multiprocessing.cpu_count(),
-                        help="The number of processes. (default, all the available cores)")
+    parser.add_argument("--ms",dest="motif_species",default='Homo sapiens',
+                        help="Species of motifs in the JASPAR database. Choose from {{'Homo sapiens','Mus musculus'}}")
+    parser.add_argument("--n_jobs",dest = "n_jobs",type=int, default=multiprocessing.cpu_count(),
+                        help="The number of parallel jobs to run. (default, all the available cores)")
     parser.add_argument("-o","--output_folder",dest="output_folder", default=None,
                         help="Output folder")
 
@@ -38,11 +44,15 @@ def main():
     file_count = args.file_count
     file_region = args.file_region
     file_sample = args.file_sample
+    genome = args.genome
+    feature = args.feature
     k = args.k
-    n_processes = args.n_processes
+    motif_species = args.motif_species
+    n_jobs = args.n_jobs
     output_folder = args.output_folder #work directory
     try:
-        adata = stream_atac.preprocess_atac(file_count=file_count,file_region=file_region,file_sample=file_sample,k=k,n_jobs=n_processes,workdir=output_folder)
+        adata = stream_atac.preprocess_atac(file_count=file_count,file_region=file_region,file_sample=file_sample, genome = genome,
+                                            feature=feature, k=k, motif_species=motif_species,n_jobs=n_jobs,workdir=output_folder)
     except:
         print("An exception occurred.")
     else:
