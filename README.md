@@ -23,6 +23,8 @@ $ conda create -n myenv python=3.6 stream_atac
 $ conda activate myenv
 ```
 
+Usage
+-----
 
 To run `stream_atac` at the command-line interface:
 
@@ -46,11 +48,27 @@ Specify the number of processes (default, all the available cores).
 Output folder (default: None)
 ```
 
+Tutorial
+--------
+
 Example dataset can be found:
 
 [Buenrostro_2018](https://www.dropbox.com/sh/zv6z7f3kzrafwmq/AACAlU8akbO_a-JOeJkiWT1za?dl=0)
 
+Using k-mers to generate feature matrix:  
 
 ```sh
-$ stream_atac -c count_file.tsv.gz -s sample_file.tsv.gz -r region_file.bed.gz
+$ stream_atac -c count_file.tsv.gz -s sample_file.tsv.gz -r region_file.bed.gz -g hg19
 ```
+
+Using motifs to generate feature matrix:  
+
+```sh
+$ stream_atac -c count_file.tsv.gz -s sample_file.tsv.gz -r region_file.bed.gz -g hg19 -f motif
+```
+
+More downstream analyses with STREAM:
+
+* Example for scATAC-seq with k-mers: [STREAM_scATAC-seq.ipynb](https://nbviewer.jupyter.org/github/pinellolab/STREAM/blob/master/tutorial/4.STREAM_scATAC-seq.ipynb?flush_cache=true)
+
+
