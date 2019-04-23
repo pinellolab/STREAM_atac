@@ -39,11 +39,17 @@ scATAC-seq counts file name in .tsv or .tsv.gz format
 -r, --file_region  
 scATAC-seq regions file name in .bed or .bed.gz format  
 -s, --file_sample  
-scATAC-seq samples file name in .tsv or tsv.gz format  
+scATAC-seq samples file name in .tsv or tsv.gz format 
+-g, --genome
+Reference genome. Choose from {{'mm9', 'mm10', 'hg38', 'hg19'}}
+-f, --feature
+Features used to have the analysis. Choose from {{'kmer', 'motif'}} 
 -k
 k-mer length for scATAC-seq analysis  
---n_processes  
-Specify the number of processes (default, all the available cores).
+--ms, motif_species
+Species of motifs in the JASPAR database. Choose from {{'Homo sapiens','Mus musculus'}}
+--n_jobs  
+The number of parallel jobs to run. (default, all the available cores)
 -o, --output_folder  
 Output folder (default: None)
 ```
@@ -55,19 +61,19 @@ Example dataset can be found:
 
 [Buenrostro_2018](https://www.dropbox.com/sh/zv6z7f3kzrafwmq/AACAlU8akbO_a-JOeJkiWT1za?dl=0)
 
-Using k-mers to generate feature matrix:  
+Using *k-mers* to generate feature matrix:  
 
 ```sh
 $ stream_atac -c count_file.tsv.gz -s sample_file.tsv.gz -r region_file.bed.gz -g hg19
 ```
 
-Using motifs to generate feature matrix:  
+Using *motifs* to generate feature matrix:  
 
 ```sh
 $ stream_atac -c count_file.tsv.gz -s sample_file.tsv.gz -r region_file.bed.gz -g hg19 -f motif
 ```
 
-More downstream analyses with STREAM:
+**More downstream analyses with STREAM**:
 
 * Example for scATAC-seq with k-mers: [STREAM_scATAC-seq.ipynb](https://nbviewer.jupyter.org/github/pinellolab/STREAM/blob/master/tutorial/4.STREAM_scATAC-seq.ipynb?flush_cache=true)
 
