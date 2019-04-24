@@ -16,6 +16,6 @@ setup(name='stream_atac',
       license='Affero',
       packages=['stream_atac'],
       package_dir={'stream_atac': 'stream_atac'},
-      install_requires=[''],
+      install_requires=['rpy2>=3.0.0'],
       entry_points = {'console_scripts': ['stream_atac=stream_atac.command_line:main']})
 
