@@ -75,6 +75,7 @@ $ stream_atac -c count_file.tsv.gz -s sample_file.tsv.gz -r region_file.bed.gz -
 
 **More downstream analyses with STREAM**:
 
-* Example for scATAC-seq with k-mers: [STREAM_scATAC-seq.ipynb](https://nbviewer.jupyter.org/github/pinellolab/STREAM/blob/master/tutorial/4.STREAM_scATAC-seq.ipynb?flush_cache=true)
+* Example for scATAC-seq(using k-mers): [STREAM_scATAC-seq_k-mers.ipynb](https://nbviewer.jupyter.org/github/pinellolab/STREAM/blob/master/tutorial/4.STREAM_scATAC-seq_k-mers.ipynb?flush_cache=true)
 
+* Example for scATAC-seq(using motifs): [STREAM_scATAC-seq_motifs.ipynb](https://nbviewer.jupyter.org/github/pinellolab/STREAM/blob/master/tutorial/5.STREAM_scATAC-seq_motifs.ipynb?flush_cache=true)
 
