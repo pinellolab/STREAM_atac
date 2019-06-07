@@ -26,7 +26,7 @@ def main():
                         help="scATAC-seq regions file name in .bed or .bed.gz format")
     parser.add_argument("-s","--file_sample",dest="file_sample", default=None,required=True,
                         help="scATAC-seq samples file name in .tsv or tsv.gz format")
-    parser.add_argument("-g","--genome",dest="genome", default=None,required=True,
+    parser.add_argument("-g","--genome",dest="genome", default='hg19',
                         help="Reference genome. Choose from {{'mm9', 'mm10', 'hg38', 'hg19'}} ")    
     parser.add_argument("-f","--feature",dest="feature", default='kmer',
                         help="Features used to have the analysis. Choose from {{'kmer', 'motif'}}")    
