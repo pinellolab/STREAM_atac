@@ -76,7 +76,7 @@ def preprocess_atac(file_count=None,file_region=None,file_sample=None, genome = 
     else:
         if(genome not in ['mm9','mm10','hg38','hg19']):
             raise ValueError("Not supported reference genome: '%s'" % genome)   
-        if(motif_species not in ['Homo sapiens','mm10','hg38','hg19']):
+        if(motif_species not in ['Homo sapiens','Mus musculus']):
             raise ValueError("Not supported reference genome: '%s'" % genome)  
         if(feature not in ['kmer','motif']):
             raise ValueError("Not supported feature: '%s'" % feature)             
