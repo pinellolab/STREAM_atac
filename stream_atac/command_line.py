@@ -34,8 +34,8 @@ def main():
                         help="k-mer length for scATAC-seq analysis")
     parser.add_argument("--ms",dest="motif_species",default='Homo sapiens',
                         help="Species of motifs in the JASPAR database. Choose from {{'Homo sapiens','Mus musculus'}}")
-    parser.add_argument("--n_jobs",dest = "n_jobs",type=int, default=multiprocessing.cpu_count(),
-                        help="The number of parallel jobs to run. (default, all the available cores)")
+    parser.add_argument("--n_jobs",dest = "n_jobs",type=int, default=1,
+                        help="The number of parallel jobs to run. (default,1)")
     parser.add_argument("-o","--output_folder",dest="output_folder", default=None,
                         help="Output folder")
 

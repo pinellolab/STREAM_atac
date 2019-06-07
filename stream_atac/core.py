@@ -14,7 +14,7 @@ import conda.cli
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 def preprocess_atac(file_count,file_region,file_sample, genome = 'hg19', motif_species = 'Homo sapiens',
-                    feature = 'kmer',file_format='tsv',k=7,n_jobs = multiprocessing.cpu_count(),file_path='',delimiter='\t',workdir=None,**kwargs):
+                    feature = 'kmer',file_format='tsv',k=7,n_jobs = 1,file_path='',delimiter='\t',workdir=None,**kwargs):
     """Preprocess single cell atac-seq data and genearate a scaled z-score matrix.
     
     Parameters
@@ -35,7 +35,7 @@ def preprocess_atac(file_count,file_region,file_sample, genome = 'hg19', motif_s
         File format of file_count. Currently supported file formats: 'tsv','txt','csv','mtx'.
     k: `int`, optional (default: 7)
         k mer.  
-    n_jobs: `int`, optional (default: all available cpus)
+    n_jobs: `int`, optional (default: 1)
         The number of parallel jobs to run
     delimiter: `str`, optional (default: '\t')
         Delimiter to use.
@@ -73,7 +73,7 @@ def preprocess_atac(file_count,file_region,file_sample, genome = 'hg19', motif_s
     if(genome not in ['mm9','mm10','hg38','hg19']):
         raise ValueError("Not supported reference genome: '%s'" % genome)   
     if(motif_species not in ['Homo sapiens','Mus musculus']):
-        raise ValueError("Not supported reference genome: '%s'" % genome)  
+        raise ValueError("Not supported species: '%s'" % motif_species)  
     if(feature not in ['kmer','motif']):
         raise ValueError("Not supported feature: '%s'" % feature)             
     dict_genome = {'mm9':'BSgenome.Mmusculus.UCSC.mm9',
