@@ -62,7 +62,7 @@ def main():
     try:
         adata = stream_atac.preprocess_atac(file_count=file_count,file_region=file_region,file_sample=file_sample, genome = genome,
                                             feature=feature, k=k, resize_peak=resize_peak, peak_width=peak_width, file_format=file_format, n_jobs=n_jobs,workdir=output_folder)
-        adata.write(os.path.join(workdir,'adata.h5ad'))
+        adata.write(os.path.join(output_folder,'adata.h5ad'))
     except:
         print("An exception occurred.")
     else:

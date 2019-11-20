@@ -16,6 +16,8 @@ setup(name='stream_atac',
       license='Affero',
       packages=['stream_atac'],
       package_dir={'stream_atac': 'stream_atac'},
+      package_data={'stream_atac': ['run_preprocess.R']},
+      include_package_data=True,
       install_requires=[''],
       entry_points = {'console_scripts': ['stream_atac=stream_atac.command_line:main']})
 

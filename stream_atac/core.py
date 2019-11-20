@@ -84,7 +84,7 @@ def preprocess_atac(file_count,file_region,file_sample, genome = 'hg19',
     if(genome in ['mm9','mm10']):
         species = "Mus musculus"
 
-    print('Importing packages...')
+    print('Checking if required packages are installed ...')
     rbase = importr('base')
     if(not rbase.requireNamespace(dict_genome[genome], quietly = True)[0]):
         pkg = 'bioconductor-'+dict_genome[genome].lower()
@@ -109,10 +109,11 @@ def preprocess_atac(file_count,file_region,file_sample, genome = 'hg19',
     
     _fp = lambda f:  os.path.join(file_path,f)
     print('Running chromVAR pipeline ...')
+    _root = os.path.abspath(os.path.dirname(__file__))
     if(resize_peak):
-        preprocess_cmd='Rscript run_preprocess.R -c {0} -r {1} -s {2} -g {3} -f {4} -k {5:d} --species "{6}" --n_jobs {7:d} -o {8} --file_format {9} --peak_width {10} --resize_peak'.format(_fp(file_count),_fp(file_region),_fp(file_sample),dict_genome[genome],feature,k,species,n_jobs,workdir,file_format,peak_width)
+        preprocess_cmd='Rscript ' + os.path.join(_root,'run_preprocess.R') + ' -c {0} -r {1} -s {2} -g {3} -f {4} -k {5:d} --species "{6}" --n_jobs {7:d} -o {8} --file_format {9} --peak_width {10} --resize_peak'.format(_fp(file_count),_fp(file_region),_fp(file_sample),dict_genome[genome],feature,k,species,n_jobs,workdir,file_format,peak_width)
     else:
-        preprocess_cmd='Rscript run_preprocess.R -c {0} -r {1} -s {2} -g {3} -f {4} -k {5:d} --species "{6}" --n_jobs {7:d} -o {8} --file_format {9}'.format(_fp(file_count),_fp(file_region),_fp(file_sample),dict_genome[genome],feature,k,species,n_jobs,workdir,file_format)
+        preprocess_cmd='Rscript ' + os.path.join(_root,'run_preprocess.R') + ' -c {0} -r {1} -s {2} -g {3} -f {4} -k {5:d} --species "{6}" --n_jobs {7:d} -o {8} --file_format {9}'.format(_fp(file_count),_fp(file_region),_fp(file_sample),dict_genome[genome],feature,k,species,n_jobs,workdir,file_format)
     # print(preprocess_cmd)
     code = subprocess.call(preprocess_cmd,shell=True)
     if(code!=0):

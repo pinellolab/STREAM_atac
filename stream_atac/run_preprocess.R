@@ -68,6 +68,7 @@ main <- function(){
   suppressMessages(library(data.table))
   
   set.seed(2019)
+  
   print(paste('Using',n_jobs,'cores...',sep = " "))
   register(MulticoreParam(n_jobs))
   
