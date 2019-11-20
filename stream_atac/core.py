@@ -113,7 +113,7 @@ def preprocess_atac(file_count,file_region,file_sample, genome = 'hg19',
         preprocess_cmd='Rscript run_preprocess.R -c {0} -r {1} -s {2} -g {3} -f {4} -k {5:d} --species "{6}" --n_jobs {7:d} -o {8} --file_format {9} --peak_width {10} --resize_peak'.format(_fp(file_count),_fp(file_region),_fp(file_sample),dict_genome[genome],feature,k,species,n_jobs,workdir,file_format,peak_width)
     else:
         preprocess_cmd='Rscript run_preprocess.R -c {0} -r {1} -s {2} -g {3} -f {4} -k {5:d} --species "{6}" --n_jobs {7:d} -o {8} --file_format {9}'.format(_fp(file_count),_fp(file_region),_fp(file_sample),dict_genome[genome],feature,k,species,n_jobs,workdir,file_format)
-    print(preprocess_cmd)
+    # print(preprocess_cmd)
     code = subprocess.call(preprocess_cmd,shell=True)
     if(code!=0):
         print('preprocessing failed')
