@@ -24,11 +24,11 @@ print('Version %s\n' % stream_atac.__version__,flush=True)
 def main():
     parser = argparse.ArgumentParser(description='%s Parameters' % __tool_name__ ,formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("-c", "--file_count", dest="file_count",default = None,required=True,
-                        help="scATAC-seq counts file name in .tsv or .tsv.gz format", metavar="FILE")
+                        help="scATAC-seq counts file name", metavar="FILE")
     parser.add_argument("-r", "--file_region",dest="file_region", default=None,required=True,
                         help="scATAC-seq regions file name in .bed or .bed.gz format")
     parser.add_argument("-s","--file_sample",dest="file_sample", default=None,required=True,
-                        help="scATAC-seq samples file name in .tsv or tsv.gz format")
+                        help="scATAC-seq samples file name")
     parser.add_argument("-g","--genome",dest="genome", default='hg19',
                         help="Reference genome. Choose from {{'mm9', 'mm10', 'hg38', 'hg19'}} ")    
     parser.add_argument("-f","--feature",dest="feature", default='kmer',

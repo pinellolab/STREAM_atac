@@ -19,7 +19,7 @@ $ conda config --add channels conda-forge
 3)	Create an environment named `myenv` , install **stream_atac**, and activate it with the following commands:
 
 ```sh
-$ conda create -n myenv python=3.6 stream_atac
+$ conda create -n myenv python stream_atac
 $ conda activate myenv
 ```
 
@@ -35,21 +35,25 @@ To run `stream_atac` at the command-line interface:
 Users can specify the following options:
 ```
 -c, --file_count  
-scATAC-seq counts file name in .tsv or .tsv.gz format  
+scATAC-seq counts file name
 -r, --file_region  
 scATAC-seq regions file name in .bed or .bed.gz format  
 -s, --file_sample  
-scATAC-seq samples file name in .tsv or tsv.gz format 
+scATAC-seq samples file name
 -g, --genome
 Reference genome. Choose from {{'mm9', 'mm10', 'hg38', 'hg19'}}
 -f, --feature
 Features used to have the analysis. Choose from {{'kmer', 'motif'}} 
 -k
-k-mer length for scATAC-seq analysis  
---ms, motif_species
-Species of motifs in the JASPAR database. Choose from {{'Homo sapiens','Mus musculus'}}
+k-mer length for scATAC-seq analysis. (default, 7)
+--resize_peak
+Resize peaks when peaks have different widths.
+--peak_width  
+Specify the width of peak when resizing them. Only valid when resize_peak is True.
 --n_jobs  
-The number of parallel jobs to run. (default, all the available cores)
+The number of parallel jobs to run. (default, 1)
+--file_format   
+File format of file_count. Currently supported file formats: 'tsv','txt','csv','mtx'.
 -o, --output_folder  
 Output folder (default: None)
 ```
@@ -61,16 +65,28 @@ Example dataset can be found:
 
 [Buenrostro_2018](https://www.dropbox.com/sh/zv6z7f3kzrafwmq/AACAlU8akbO_a-JOeJkiWT1za?dl=0)
 
-Using *k-mers* to generate feature matrix:  
+Using *k-mers* to generate zscore matrix:  
 
 ```sh
-$ stream_atac -c count_file.tsv.gz -s sample_file.tsv.gz -r region_file.bed.gz -g hg19
+$ stream_atac -c count_file.tsv.gz -r region_file.bed.gz -s sample_file.tsv.gz -g hg19 -f kmer -k 7 --n_jobs 3 -o output_folder
 ```
 
-Using *motifs* to generate feature matrix:  
+Using *motifs* to generate zscore matrix:  
 
 ```sh
-$ stream_atac -c count_file.tsv.gz -s sample_file.tsv.gz -r region_file.bed.gz -g hg19 -f motif
+$ stream_atac -c count_file.tsv.gz -r region_file.bed.gz -s sample_file.tsv.gz -g hg19 -f motif --n_jobs 3 -o output_folder
+```
+
+For 10x CellRanger output:
+
+Using *k-mers* to generate zscore matrix:  
+```sh
+$ stream_atac -c ./filtered_peak_bc_matrix/matrix.mtx -r ./filtered_peak_bc_matrix/peaks.bed -s ./filtered_peak_bc_matrix/barcodes.tsv --file_format mtx -g hg19 -f kmer -k 7 --n_jobs 3 -o output_folder
+```
+
+Using *motifs* to generate zscore matrix:  
+```sh
+$ stream_atac -c ./filtered_peak_bc_matrix/matrix.mtx -r ./filtered_peak_bc_matrix/peaks.bed -s ./filtered_peak_bc_matrix/barcodes.tsv --file_format mtx -g hg19 -f motif --n_jobs 3 -o output_folder
 ```
 
 **More downstream analyses with STREAM**:
