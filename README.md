@@ -61,23 +61,23 @@ Output folder (default: None)
 Tutorial
 --------
 
-Example dataset can be found:
+### Example dataset can be found:
 
 [Buenrostro_2018](https://www.dropbox.com/sh/zv6z7f3kzrafwmq/AACAlU8akbO_a-JOeJkiWT1za?dl=0)
 
-Using *k-mers* to generate zscore matrix:  
+#### Using *k-mers* to generate zscore matrix:  
 
 ```sh
 $ stream_atac -c count_file.tsv.gz -r region_file.bed.gz -s sample_file.tsv.gz -g hg19 -f kmer -k 7 --n_jobs 3 -o output_folder
 ```
 
-Using *motifs* to generate zscore matrix:  
+#### Using *motifs* to generate zscore matrix:  
 
 ```sh
 $ stream_atac -c count_file.tsv.gz -r region_file.bed.gz -s sample_file.tsv.gz -g hg19 -f motif --n_jobs 3 -o output_folder
 ```
 
-For 10x CellRanger output:
+### For 10X CellRanger output:
 
 Using *k-mers* to generate zscore matrix:  
 ```sh
@@ -88,6 +88,23 @@ Using *motifs* to generate zscore matrix:
 ```sh
 $ stream_atac -c ./filtered_peak_bc_matrix/matrix.mtx -r ./filtered_peak_bc_matrix/peaks.bed -s ./filtered_peak_bc_matrix/barcodes.tsv --file_format mtx -g hg19 -f motif --n_jobs 3 -o output_folder
 ```
+
+### Final Output
+
+After running stream_atac, three files will be generated, including 'zscores.tsv.gz', 'zscores_scaled.tsv.gz', and 'adata.h5ad'.
+
+'zscores_scaled.tsv.gz' and 'adata.h5ad' can be directly used for downstream analysis.
+
+```python
+adata = st.read(file_name='./zscores_scaled.tsv.gz',experiment='atac-seq')
+```
+
+or
+
+```python
+adata = st.read(file_name='./adata.h5ad',experiment='atac-seq',file_format='h5ad')
+```
+
 
 **More downstream analyses with STREAM**:
 
