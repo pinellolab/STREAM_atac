@@ -32,10 +32,14 @@ def main():
                         help="Features used to have the analysis. Choose from {{'kmer', 'motif'}}")    
     parser.add_argument("-k",dest="k",type=int,default=7,
                         help="k-mer length for scATAC-seq analysis")
-    parser.add_argument("--ms",dest="motif_species",default='Homo sapiens',
-                        help="Species of motifs in the JASPAR database. Choose from {{'Homo sapiens','Mus musculus'}}")
+    parser.add_argument("--resize_peak",dest="resize_peak",action="store_true",
+                        help="Resize peaks when peaks have different widths.")
+    parser.add_argument("--peak_width",dest = "peak_width",type=int, default=450,
+                        help="Specify the width of peak when resizing them. Only valid when resize_peak is True.")
     parser.add_argument("--n_jobs",dest = "n_jobs",type=int, default=1,
                         help="The number of parallel jobs to run. (default,1)")
+    parser.add_argument("--file_format",dest="file_format", default='tsv',
+                        help=" File format of file_count. Currently supported file formats: 'tsv','txt','csv','mtx'.") 
     parser.add_argument("-o","--output_folder",dest="output_folder", default=None,
                         help="Output folder")
 
@@ -47,12 +51,14 @@ def main():
     genome = args.genome
     feature = args.feature
     k = args.k
-    motif_species = args.motif_species
+    resize_peak = args.resize_peak
+    peak_width = args.peak_width
     n_jobs = args.n_jobs
+    file_format = args.file_format
     output_folder = args.output_folder #work directory
     try:
         adata = stream_atac.preprocess_atac(file_count=file_count,file_region=file_region,file_sample=file_sample, genome = genome,
-                                            feature=feature, k=k, motif_species=motif_species,n_jobs=n_jobs,workdir=output_folder)
+                                            feature=feature, k=k, resize_peak=resize_peak, peak_width=peak_width, file_format=file_format, n_jobs=n_jobs,workdir=output_folder)
     except:
         print("An exception occurred.")
     else:
