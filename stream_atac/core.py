@@ -1,3 +1,6 @@
+# Authors: Huidong Chen
+# Contact information: huidong.chen@mgh.harvard.edu
+
 import numpy as np
 import pandas as pd
 import anndata as ad

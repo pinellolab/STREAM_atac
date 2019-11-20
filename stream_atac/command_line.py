@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# Authors: Huidong Chen
+# Contact information: huidong.chen@mgh.harvard.edu
+
 import warnings
 warnings.filterwarnings('ignore')
 

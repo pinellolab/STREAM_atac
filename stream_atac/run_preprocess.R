@@ -1,3 +1,6 @@
+# Authors: Huidong Chen
+# Contact information: huidong.chen@mgh.harvard.edu
+
 suppressMessages(library(optparse,quietly = TRUE))
 
 main <- function(){
