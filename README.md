@@ -57,6 +57,42 @@ File format of file_count. Currently supported file formats: 'tsv','txt','csv','
 -o, --output_folder  
 Output folder (default: None)
 ```
+File Format
+-----------
+
+To perform STREAM_atac preprocess, the main input includes three files: **count file**, **region file** and **sample file**. 
+
+**count file**, .tsv or .tsv.gz format. A tab-delimited triplet file. It contains three columns. The first column specifies the rows indices (the regions) for non-zero entry. The second column specifies the columns indices (the sample) for non-zero entry. The last column contains the number of reads in a given region for a particular cell. No header is necessary:
+
+|        |     |  |
+|--------|-----|--|
+| 3735   | 96  | 1|
+| 432739 | 171 | 2|
+| 133126 | 292 | 1|
+| 219297 | 359 | 1|
+| 284936 | 1222| 1|
+| 442588 | 1580| 2|
+
+**region file**, .bed or .bed.gz format. A tab-delimited .bed file with three columns. The first column specifies chromosome names. The second column specifies the start position of the region. The third column specifies the end position of the region. The order of regions should be consistent with the regions indices in the count file. No header is necessary:
+
+|      |       |      |
+|------|-------|------|
+| chr1 | 10279 | 10779|
+| chr1 | 13252 | 13752|
+| chr1 | 16019 | 16519|
+| chr1 | 29026 | 29526|
+| chr1 | 96364 | 96864|
+
+**sample file**, .tsv or .tsv.gz format. It has one column. Each row is a cell name.  The order of the cells should be consistent with the sample indices in count file. No header is necessary:
+
+|                                    |
+|------------------------------------|
+| singles-BM0828-HSC-fresh-151027-1  | 
+| singles-BM0828-HSC-fresh-151027-2  | 
+| singles-BM0828-HSC-fresh-151027-3  |
+| singles-BM0828-HSC-fresh-151027-4  |
+| singles-BM0828-HSC-fresh-151027-5  |
+
 
 Tutorial
 --------
@@ -91,7 +127,17 @@ $ stream_atac -c ./filtered_peak_bc_matrix/matrix.mtx -r ./filtered_peak_bc_matr
 
 After running stream_atac, three files will be generated, including `zscores.tsv.gz`, `zscores_scaled.tsv.gz`, and `adata.h5ad`.
 
-`zscores_scaled.tsv.gz` and `adata.h5ad` can be directly used for downstream analysis.
+For the scaled z-score file, each row represents a k-mer DNA sequence/motif and each column represents one cell. Each entry is a scaled z-score of the accessibility of each k-mer/motif across cells. E.g. the scaled z-score using k-mers looks like:
+
+|        | singles-BM0828-HSC-fresh-151027-1 | singles-BM0828-HSC-fresh-151027-2 | singles-BM0828-HSC-fresh-151027-3 |
+|--------|-----------------------------------|-----------------------------------|-----------------------------------|
+| AAAAAAA|-0.15973157637808505               | 0.18950966450007853               | 0.07713107176524692               | 
+| AAAAAAG|-1.3630723054479532                | -0.04770034004421244              | 0.6387323857481045                |
+| AAACACG|-0.2065161126378667                | -1.3375384076872765               | 0.2660278729402342                |
+| AGCGTTA|-0.496859947462221                 | 0.7181918229050274                | 0.19603357892921522               |
+| ATACTCA|-1.2127919166377426                | 0.7938414496478844                | -1.2665513250104594               |
+
+**`zscores_scaled.tsv.gz` and `adata.h5ad` can be directly used for downstream analysis.**
 
 ```python
 import stream as st
